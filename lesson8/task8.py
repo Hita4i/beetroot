@@ -1,7 +1,8 @@
 # Task 1
 
 def oops(x):
-    return x[5]
+    x = input('Введите строку: ')
+    return x[40]
 
 
 def try_oops():
