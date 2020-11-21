@@ -1,15 +1,16 @@
 # Task 1
 
-def oops(x):
-    return x[5]
+def oops():
+    x = input('Enter string: ')
+    return x[40]
 
 
 def try_oops():
     try:
-        x = oops('abcd')
+        oops()
     except IndexError as ind:
         return f'индекс строки вне диапазона: {ind}'
-    return x
+
 
 
 print(try_oops())
