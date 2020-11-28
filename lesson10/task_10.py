@@ -28,7 +28,3 @@ person1 = Person('Carl', 'Jonson', 26)
 person2 = Person('Mr.', 'Morgan', 50)
 dog_sharik = Dog(5)
 dog_bobik = Dog(3)
-
-
-
-
