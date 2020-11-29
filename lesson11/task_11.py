@@ -1,5 +1,3 @@
-import os
-import json
 
 
 class Person:
@@ -7,13 +5,6 @@ class Person:
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
-
-    # def writ(self):
-    #     with open('person_list.txt', 'w') as p_l:
-    #         p_l.write(self.first_name)
-    #     with open('person_list.txt', 'r') as p_l:
-    #         read_p_l = p_l.read()
-    #     return read_p_l
 
     def __repr__(self):
         return self.first_name + ' ' + self.last_name + ' - ' + str(self.age)
@@ -27,7 +18,6 @@ class Student(Person):
 
     def evaluation(self, evaluation):
         self.total_evaluation += evaluation
-
 
 
 class Teacher(Person):
@@ -49,3 +39,27 @@ teacher = Teacher('Nina', 'Mihailovna', 60, 'Biology', 32, 5200)
 print(teacher)
 print()
 print(person)
+
+
+class Mathematician:
+
+    def square_nums(self, *args):
+        self.list_of_integer = args
+        return [i * i for i in args]
+
+    def remove_positives(self, *args):
+        self.list_of_numbers = args
+        return [i for i in args if i < 0]
+
+    def filter_leaps(self, *args):
+        self.list_of_dates = args
+        return [i for i in args if i % 4 == 0]
+
+
+s = Mathematician()
+print(s.square_nums(2, 6, 5))
+print(s.remove_positives(-1, -5, 6, 10, -20))
+print(s.filter_leaps(2000, 2020, 2015, 2010))
+
+
+
