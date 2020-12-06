@@ -5,8 +5,8 @@ from functools import wraps
 def logger(func):
     @wraps(func)
     def inner(*args):
-        print(func.__name__)
-        print(args)
+        print(f'{func.__name__} - {args}')
+
     return inner
 
 
