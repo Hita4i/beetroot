@@ -6,6 +6,7 @@ def logger(func):
     @wraps(func)
     def inner(*args):
         print(func.__name__)
+        print(args)
     return inner
 
 
