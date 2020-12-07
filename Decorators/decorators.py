@@ -4,7 +4,7 @@ from functools import wraps
 
 def logger(func):
     @wraps(func)
-    def inner(*args):
+    def inner(*args, **kwargs):
         print(f'{func.__name__} - {args}')
 
     return inner
