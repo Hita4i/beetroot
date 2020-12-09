@@ -4,12 +4,11 @@ class ValidateEmail:
         self.email = email
 
     def validate(self):
-        no_valid_characters = '@'
-        characters_count = 0
+
         if isinstance(self.email, str):
-            for characters in self.email:
-                if no_valid_characters in characters:
-                    characters_count += 1
+            characters_count = self.email.count('@')
+            if characters_count == 0:
+                print('Wrong email,  missing \'@\'')
             if characters_count == 1:
                 print('Email it\'s Ok')
             else:
