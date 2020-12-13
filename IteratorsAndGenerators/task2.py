@@ -1,5 +1,7 @@
 def in_range(start: int, stop: int = None, step: int = 1):
-    if stop == None:
+    if step == 0:
+        raise Exception('Step can\'t be 0')
+    if stop is None:
         new_start = start
         start = 0
         stop = new_start
