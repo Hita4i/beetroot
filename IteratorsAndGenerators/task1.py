@@ -8,6 +8,5 @@ def with_index(items, start: int = 0):
         start += 1
 
 
-with_index(my_list, 3)
 for i, item in with_index(my_list, 3):
     print(i, item)
