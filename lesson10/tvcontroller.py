@@ -42,7 +42,10 @@ class TVController:
         return self.valid_channel
 
     def current_channel(self):
-        return self.valid_channel
+        self.current_channel = input('Ведите интересующий канал: ')
+        print(self.current_channel)
+        self.result = TVController.CHANNELS[int(self.valid_channel)]
+        return self.result
 
     def is_exist(self):
         self.exist_channel = input('Ведите интересующий канал: ')
@@ -74,5 +77,7 @@ x = TVController()
 # print(x.switch_to_previous_channel())
 # print(x.switch_to_previous_channel())
 # print(x.switch_to_previous_channel())
-# print(x.current_channel())
+print(x.current_channel())
+# print(x.is_exist())
+# print(x.is_exist())
 # print(x.is_exist())
