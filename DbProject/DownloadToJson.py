@@ -1,17 +1,17 @@
 import json
 import pyodbc
 
-DBQ = input('Введите путь к файлу: ')
-class Connect:
-    def __init__(self):
 
+class Connect:
+    def __init__(self, db_file_path, table_name_):
+        self.db_file_path = db_file_path
+        self.table_name_ = table_name_
         self.conn_str = (
             r'DRIVER={Microsoft Access Driver (*.mdb)};'
-            rf'DBQ={DBQ};'
+            rf'DBQ={self.db_file_path};'
         )
         self.conn = pyodbc.connect(self.conn_str)
         self.cursor = self.conn.cursor()
-        self.table_name_ = 'tab'
         self.query = f'SELECT * FROM {self.table_name_}'
 
     def close_connect(self):
@@ -35,7 +35,7 @@ class Connect:
 
 
 class Download(Connect):
-    def __init__(self):
+    def __init__(self,):
         super().__init__()
 
     def download_to_list(self):
@@ -132,8 +132,8 @@ class Download(Connect):
             print('Connect is close')
 
 
-c = Connect()
+c = Connect('import.mdb', 'tab')
 d = Download()
-d.download_to_list()
-d.save_to_json()
+# d.download_to_list()
+# d.save_to_json()
 c.get_oll_colunms()
