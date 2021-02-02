@@ -1,0 +1,10 @@
+.open hw.db
+.ta
+pragma table_info(employees);
+SELECT first_name as "First Name" FROM employees;
+SELECT last_name as "Last Name" FROM employees;
+SELECT department_id FROM employees;
+SELECT * FROM employees GROUP BY first_name;
+SELECT first_name, last_name, salary/100*12 FROM employees;
+SELECT MAX(salary), MIN(salary) FROM employees;
+SELECT first_name, last_name, salary*1.00 FROM employees; --решение не найдено...
