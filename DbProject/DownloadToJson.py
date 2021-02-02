@@ -1,14 +1,14 @@
 import json
 import pyodbc
-
+from typing import List
 
 class Connect:
-    def __init__(self, db_file_path, table_name_):
+    def __init__(self, db_file_path='import.mdb'):
+        self.table_name_ = 'tab'
         self.db_file_path = db_file_path
-        self.table_name_ = table_name_
         self.conn_str = (
             r'DRIVER={Microsoft Access Driver (*.mdb)};'
-            rf'DBQ={self.db_file_path};'
+            rf'DBQ={db_file_path};'
         )
         self.conn = pyodbc.connect(self.conn_str)
         self.cursor = self.conn.cursor()
@@ -18,7 +18,7 @@ class Connect:
         self.cursor.close()
         self.conn.close()
 
-    def get_oll_colunms(self):
+    def get_all_colunms(self):
         """
         добавить название всех колонок
         в таблице в масив и словарь
@@ -26,7 +26,7 @@ class Connect:
         """
         self.my_list = []
         self.my_dict = {}
-        for row in self.cursor.columns(table=self.table_name_):
+        for row in self.cursor.columns():
             self.my_list.append(row.column_name)
         for k in self.my_list:
             self.my_dict[f'{k}'] = ''
@@ -35,51 +35,51 @@ class Connect:
 
 
 class Download(Connect):
-    def __init__(self,):
-        super().__init__()
+    def __init__(self, db_file_path):
+        super().__init__(db_file_path)
 
     def download_to_list(self):
 
-        self.full_list = []
+        data = []
         for i in self.cursor.execute(self.query):
-            Тип_ВМД = str(i[0])
-            Відправник = str(i[1])
-            Відправник_2 = str(i[2])
-            ОКПЕО_Одержувач = str(i[3])
-            Одержувач = str(i[4])
-            Адресa_Одержувача = str(i[5])
-            ОКПЕО_Декларанта = str(i[6])
-            Декларант = str(i[7])
-            Адресa_Декларанта = str(i[8])
-            МИТНИЙ_ОРГАН = str(i[9])
-            номер_ВМД = str(i[10])
-            Дата_випуску = str(i[11])
-            Товар_номер = str(i[12])
-            Код_товару = str(i[13])
-            Опис_товару = str(i[14])
-            Торгівельна_марка = str(i[15])
-            Країна_відправлення = str(i[16])
-            Торгівельна_країна = str(i[17])
-            Код_країни_походженн = str(i[18])
-            Вага_брутто_кг = str(i[19])
-            Вага_нетто_кг = str(i[20])
-            Упаковка = str(i[21])
-            Додаткова_одиниця_виміру = str(i[22])
-            Кількість_в_одиницяx_виміру = str(i[23])
-            шт = str(i[24])
-            Фактурна_вартість = str(i[25])
-            Митна_вартість = str(i[26])
-            кг = str(i[27])
-            Курс = str(i[28])
-            Код_МВВ = str(i[29])
-            СТ_55 = str(i[30])
-            Ставка_мита = str(i[31])
-            контракт = str(i[32])
-            ТЗ_на_кордоні = str(i[33])
-            номер_контейнеру = str(i[34])
-            Процедура = str(i[35])
-            Митний_орган = str(i[36])
-            Умови_поставки = str(i[37])
+            Тип_ВМД = i[0]
+            Відправник = i[1]
+            Відправник_2 = i[2]
+            ОКПЕО_Одержувач = i[3]
+            Одержувач = i[4]
+            Адресa_Одержувача = i[5]
+            ОКПЕО_Декларанта = i[6]
+            Декларант = i[7]
+            Адресa_Декларанта = i[8]
+            МИТНИЙ_ОРГАН = i[9]
+            номер_ВМД = i[10]
+            Дата_випуску = i[11]
+            Товар_номер = i[12]
+            Код_товару = i[13]
+            Опис_товару = i[14]
+            Торгівельна_марка = i[15]
+            Країна_відправлення = i[16]
+            Торгівельна_країна = i[17]
+            Код_країни_походженн = i[18]
+            Вага_брутто_кг = i[19]
+            Вага_нетто_кг = i[20]
+            Упаковка = i[21]
+            Додаткова_одиниця_виміру = i[22]
+            Кількість_в_одиницяx_виміру = i[23]
+            шт = i[24]
+            Фактурна_вартість = i[25]
+            Митна_вартість = i[26]
+            кг = i[27]
+            Курс = i[28]
+            Код_МВВ = i[29]
+            СТ_55 = i[30]
+            Ставка_мита = i[31]
+            контракт = i[32]
+            ТЗ_на_кордоні = i[33]
+            номер_контейнеру = i[34]
+            Процедура = i[35]
+            Митний_орган = i[36]
+            Умови_поставки = i[37]
 
             test_dict = {
                 'Тип ВМД': Тип_ВМД,
@@ -121,19 +121,19 @@ class Download(Connect):
                 'Митний орган в"їзду': Митний_орган,
                 'Умови поставки': Умови_поставки
             }
-            self.full_list.append(test_dict)
+            data.append(test_dict)
+            d.save_to_json(data)
+    def save_to_json(self, data: List, file_name='file.json'):
 
-    def save_to_json(self):
-
-        with open('file.json', 'w') as file:
-            json.dump(self.full_list, file)
+        with open(file_name, 'w') as file:
+            json.dump(data, file)
             print('Job well done!')
             c.close_connect()
-            print('Connect is close')
 
 
-c = Connect('import.mdb', 'tab')
-d = Download()
+
+c = Connect('import.mdb')
+d = Download('import.mdb')
 # d.download_to_list()
 # d.save_to_json()
-c.get_oll_colunms()
+c.get_all_colunms()
