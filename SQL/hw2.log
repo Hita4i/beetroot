@@ -1,0 +1,20 @@
+.open 1.db
+.ta
+pragma table_info(employees)
+SELECT employees.first_name, employees.last_name, employees.department_id, department.department_name FROM employees
+INNER JOIN department ON employees.department_id = department.department_id;
+
+SELECT employees.first_name, employees.last_name, employees.department_id, locations.city, locations.state_province, department.department_name FROM employees, locations, department
+WHERE employees.department_id = department.department_id AND department.location_id = locations.location_id;
+
+SELECT employees.first_name, employees.last_name, employees.department_id, department.department_name FROM employees, department
+WHERE  employees.department_id = department.department_id AND employees.department_id == 80 OR employees.department_id = department.department_id AND employees.department_id == 40;
+
+SELECT department_name FROM department;
+--5
+SELECT jobs.job_title, employees.first_name, employees.last_name, (employees.salary + jobs.max_salary)/2 AS "average salary" FROM employees
+INNER JOIN jobs ON employees.job_id = jobs.job_id; 
+
+SELECT job_title, (min_salary + max_salary)/2 as "average salary" FROM jobs;
+--8
+--9

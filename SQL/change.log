@@ -1,0 +1,9 @@
+.open task1.sql
+CREATE TABLE workers (id INTEGER PRIMARY KEY AUTOINCREMENT,
+First_name varchar(30) NOT NULL, Last_name varchar(30) NOT NULL, Age int);
+INSERT INTO workers (first_name, last_name, age) VALUES ('Oleg', 'Kudinov', 45),('Dmitrii', 'Dmitrov', 25),
+('Maksim', 'Nazarenko', 30),('Volodya', 'Bondar', 50),
+('Andrei', 'Glotov', 32),('Viktor', 'Donetc', 40),
+('Vadim', 'Savchuk', 38);
+UPDATE workers SET first_name='Evgeny' WHERE first_name='Volodya';
+DELETE FROM workers WHERE last_name='Dmitrov';
